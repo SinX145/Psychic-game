@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Psychic Game</title>
+
+</head>
+<body>
+	<h1>Psychic Guessing Game</h1>
+	<br>
+	<h2>Guess a letter, win a prize (nothing)</h2>
+
+	<div id="scorebox">
+		<ul class="scoreboxlist">
+			<li> 
+			<p id="win">Wins: <p> 
+			</li>
+			<li> 
+			<p id="loss">Losses: </p>
+			 </li>
+			<li> 
+			<p id="lives">Lives left: </p> 
+			</li>
+			<li> 
+			<p id="guess">Your Guesses so far: </p>
+			 </li>
+			 
+	</div>
+
+	<script type="text/javascript">
+
+		var alphabet= ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+		var guess = [];
+
+		var userGuess = null;
+
+		var computerPick = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+		var win = 0;
+
+		var loss = 0;
+
+		var lives = 9;
+
+		document.onkeyup = function(event) {
+
+			var userGuess = String(event.key).toLowerCase();
+
+			if (guess.indexOf(userGuess) < 0 && alphabet.indexOf(userGuess) >= 0) 
+				{
+					guess[guess.length]=userGuess;
+					lives--;
+				}
+
+			if (computerPick == userGuess) 
+			{
+				win++;
+
+				alert("You have won, congratulations !");
+
+				lives = 9;
+
+				guess = [];
+
+				computerpick = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+				console.log("win: " + win + " loss: " + loss + " lives: " + lives + " Guesses so far: " + guess + " Computer picked: " + computerpick);
+			}
+
+			if (lives === 0) 
+			{
+				loss++;
+
+				alert("You have lost the game.");
+
+				lives = 9;
+
+				guess = [];
+
+				computerpick = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+				console.log("win: " + win + " loss: " + loss + " lives: " + lives + " Guesses so far: " + guess + " Computer picked: " + computerpick);
+			}
+
+			var french = "<p>Wins: " + win + "</p>" + "<p>Losses: " + loss + "</p>" + "<p>Lives left: " + lives + "</p>" + "<p><h4>Your guesses so far: " + guess + "</p>";
+
+			document.querySelector("#scorebox").innerHTML = french;
+
+
+			}
+
+
+	</script>
+
+</body>
+</html>
